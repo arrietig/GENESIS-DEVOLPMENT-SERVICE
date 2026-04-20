@@ -140,18 +140,40 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   gap: 10px;
   text-decoration: none;
 }
-.nav-logo img {
-  height: 38px;
-  width: auto;
+.nav-logo-icon {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+  border-radius: 6px;
+  flex-shrink: 0;
 }
 .nav-logo-text {
-  font-family: var(--font-head);
-  font-size: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.logo-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--white);
-  line-height: 1.2;
+  letter-spacing: 0.08em;
 }
-.nav-logo-text span { color: var(--cyan); }
+.logo-sub {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 0.6rem;
+  font-weight: 300;
+  color: var(--cyan);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+}
 .nav-links {
   display: flex;
   align-items: center;
@@ -618,7 +640,8 @@ footer {
   gap: 3rem;
   margin-bottom: 2.5rem;
 }
-.footer-brand .nav-logo-text { font-size: 1.2rem; margin-bottom: 0.75rem; display: block; }
+.footer-brand .logo-name { font-size: 1.3rem; }
+.footer-brand .logo-sub { font-size: 0.62rem; }
 .footer-brand p { font-size: 0.85rem; max-width: 280px; }
 .footer-col h4 { font-family: var(--font-head); font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
 .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
