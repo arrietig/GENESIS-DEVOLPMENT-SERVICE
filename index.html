@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Génesis Dev</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
   <meta name="description" content="Transformamos ideas en experiencias digitales. Desarrollo web profesional, diseño UI/UX, e-commerce y aplicaciones a medida." />
 
   <!-- Fonts -->
@@ -15,6 +16,15 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+
+  <!-- ═════════ PRELOADER ═══ -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <img src="assets/logo-icon.png" alt="Génesis" class="preloader-icon" />
+      <span class="preloader-name">GÉNESIS</span>
+      <span class="preloader-sub">Development Service</span>
+    </div>
+  </div>
 
   <!-- ═════════ NAV ═══ -->
   <nav id="navbar">
@@ -458,5 +468,12 @@
   <!-- Scripts -->
   <script src="js/shader.js?v=6"></script>
   <script src="js/main.js?v=2"></script>
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('preloader').classList.add('hidden');
+      }, 800);
+    });
+  </script>
 </body>
 </html>
