@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Génesis Development Service | Soluciones Web Profesionales</title>
+  <meta name="description" content="Transformamos ideas en experiencias digitales. Desarrollo web profesional, diseño UI/UX, e-commerce y aplicaciones a medida." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ═════════ NAV ═══ -->
+  <nav id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo">
+          <span class="nav-logo-text">Génesis <span>Dev</span></span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#about">Nosotros</a></li>
+          <li><a href="#services">Servicios</a></li>
+          <li><a href="#projects">Proyectos</a></li>
+          <li><a href="#payment">Pagos</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+
+        <a href="#contact" class="btn btn-primary nav-cta">Iniciar Proyecto</a>
+
+        <button class="hamburger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ HERO ══ -->
+  <section id="hero">
+    <canvas id="shader-canvas"></canvas>
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Disponible para nuevos proyectos
+        </div>
+
+        <h1 class="hero-title">
+          <span class="line">Soluciones Digitales</span>
+          <span class="line gradient-text typewriter"
+                data-words="a tu Medida|que Impactan|que Convierten|Profesionales"></span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Diseñamos y desarrollamos experiencias web que posicionan tu marca,
+          generan confianza y hacen crecer tu negocio.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            ✦ Solicitar presupuesto gratuito
+          </a>
+          <a href="#projects" class="btn btn-outline">
+            Ver Proyectos →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ ABOUT ═ -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-visual reveal">
+          <div class="about-card-main">
+            <span class="section-tag">Desde 2023</span>
+            <h3 style="color:var(--white);font-size:1.5rem;margin-bottom:1rem;">
+              Construcción de presencia digital con propósito
+            </h3>
+            <p>
+              Cada proyecto que desarrollamos nace de entender profundamente
+              tu negocio, tu audiencia y tus metas. No vendemos plantillas:
+              creamos soluciones únicas.
+            </p>
+            <div class="about-card-accent"></div>
+          </div>
+
+        </div>
+
+        <div class="about-text reveal reveal-delay-2">
+          <span class="section-tag">¿Quiénes Somos?</span>
+          <h2 class="section-title">
+            Tecnología al servicio de tu <span class="text-cyan">visión</span>
+          </h2>
+          <p class="section-subtitle">
+            Somos un equipo apasionado por el desarrollo web y el diseño de interfaces.
+            Combinamos creatividad técnica con estrategia de negocio para crear sitios
+            que no sólo se ven increíbles, sino que también generan resultados reales.
+          </p>
+          <ul class="values-list">
+            <li>
+              <span class="icon">⚡</span>
+              <div>
+                <strong style="color:var(--white);display:block;margin-bottom:3px;">Velocidad & Rendimiento</strong>
+                Sitios optimizados que cargan rápido y puntúan alto en Core Web Vitals.
+              </div>
+            </li>
+            <li>
+              <span class="icon">🔒</span>
+              <div>
+                <strong style="color:var(--white);display:block;margin-bottom:3px;">Seguridad & Confiabilidad</strong>
+                Implementaciones seguras con buenas prácticas desde el primer día.
+              </div>
+            </li>
+            <li>
+              <span class="icon">📱</span>
+              <div>
+                <strong style="color:var(--white);display:block;margin-bottom:3px;">Diseño Responsivo</strong>
+                Experiencia perfecta en móvil, tablet y escritorio sin excepciones.
+              </div>
+            </li>
+            <li>
+              <span class="icon">🎯</span>
+              <div>
+                <strong style="color:var(--white);display:block;margin-bottom:3px;">Orientado a Resultados</strong>
+                Cada decisión de diseño está respaldada por datos y mejores prácticas UX.
+              </div>
+            </li>
+            <li>
+              <span class="icon">🤝</span>
+              <div>
+                <strong style="color:var(--white);display:block;margin-bottom:3px;">Colaboración Transparente</strong>
+                Comunicación clara y constante durante todo el proceso de desarrollo.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ SERVICES ══ -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Nuestros servicios</span>
+        <h2 class="section-title">Servicios únicos y <span class="text-cyan">Personalizados</span></h2>
+        <p class="section-subtitle">
+          Desde la conceptualización hasta el lanzamiento y mantenimiento,
+          cubrimos todo lo que necesitas para brillar en el mundo digital.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">🌐</div>
+          <h3>Desarrollo Web</h3>
+          <p>Sitios web corporativos, landing pages y portales a medida, con código limpio, semántico y de alto rendimiento.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">🎨</div>
+          <h3>Diseño UI/UX</h3>
+          <p>Interfaces intuitivas y visualmente potentes que guían al usuario hacia la acción y refuerzan tu identidad de marca.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">🛒</div>
+          <h3>E-commerce</h3>
+          <p>Tiendas online completas con pasarelas de pago, gestión de inventario y experiencia de compra optimizada para convertir. Trabajamos con empresas dedicada a la administración y procesamiento de medios de pago electrónicos.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">⚙️</div>
+          <h3>Aplicaciones Web</h3>
+          <p>Sistemas a medida, dashboards y herramientas internas que automatizan procesos y potencian la productividad de tu equipo.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">🤖</div>
+          <h3>Bots de WhatsApp</h3>
+          <p>Agiliza tu atención al cliente con bots personalizados que responden consultas frecuentes, toman pedidos y brindan soporte 24/7 directamente en WhatsApp.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">🛡️</div>
+          <h3>Mantenimiento Web</h3>
+          <p>Actualizaciones, copias de seguridad, monitoreo y soporte continuo para que tu sitio siempre funcione al 100%.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ PROJECTS ════ -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Proyectos Realizados</span>
+        <h2 class="section-title">Empresas que <span class="text-cyan">confiaron en nosotros</span></h2>
+        <p class="section-subtitle">
+          Una muestra del trabajo que hemos entregado con dedicación,
+          atención al detalle y orientación al resultado. Nos esforzamos por superar las expectativas en cada proyecto, creando soluciones digitales que realmente marcan la diferencia para nuestros clientes.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+
+        <a class="project-card reveal reveal-delay-1" href="https://alexia-home-studio.vercel.app/AlexiaHomme.html" target="_blank" rel="noopener noreferrer">
+          <div class="project-thumb" style="background-image:url('assets/project-alexia.jpg');background-size:cover;background-position:top center;">
+            <div class="project-overlay">↗</div>
+          </div>
+          <div class="project-info">
+            <h3>Alexia Beauty Home Studio</h3>
+            <p>Sitio web elegante para estudio de belleza a domicilio con reservas online, galería de servicios y sistema de descuentos para clientes.</p>
+            <div class="project-tags">
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Node.js</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="project-card reveal reveal-delay-2" href="https://arrietig.github.io/BODR-M-/" target="_blank" rel="noopener noreferrer">
+          <div class="project-thumb" style="background-image:url('assets/project-bodrum.jpg');background-size:cover;background-position:top center;">
+            <div class="project-overlay">↗</div>
+          </div>
+          <div class="project-info">
+            <h3>Bodrüm Nails y Beauty Bar</h3>
+            <p>Plataforma web para salón de uñas y belleza con sistema de reservas, catálogo de servicios, sección de productos y contacto por WhatsApp.</p>
+            <div class="project-tags">
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">React</span></span>
+            </div>
+          </div>
+        </a>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ PAYMENT ═══ -->
+  <section id="payment" class="section">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Facilidades</span>
+        <h2 class="section-title">Métodos de <span class="text-cyan">Pago</span></h2>
+        <p class="section-subtitle">
+          Ofrecemos múltiples opciones para que el proceso de contratación
+          sea cómodo y sin complicaciones, donde quieras que estés.
+        </p>
+      </div>
+
+      <div class="payment-grid">
+
+        <div class="payment-card reveal reveal-delay-1">
+          <span class="payment-icon">🏦</span>
+          <h3>Transferencia Bancaria</h3>
+          <p>Transferencias locales e internacionales. Depósito directo a cuenta.</p>
+        </div>
+
+        <div class="payment-card reveal reveal-delay-2">
+          <span class="payment-icon">💳</span>
+          <h3>PayPal</h3>
+          <p>Pagos seguros con protección al comprador. Acepta tarjetas Visa y Mastercard.</p>
+        </div>
+
+        <div class="payment-card reveal reveal-delay-3">
+          <span class="payment-icon">₿</span>
+          <h3>Criptomonedas</h3>
+          <p>Bitcoin, USDT y USDC para clientes internacionales. Sin fronteras.</p>
+        </div>
+
+        <div class="payment-card reveal reveal-delay-4">
+          <span class="payment-icon">💵</span>
+          <h3>Efectivo / Divisa</h3>
+          <p>Pago en efectivo disponible para clientes locales en Venezuela y zonas cercanas.</p>
+        </div>
+
+      </div>
+
+      <p class="text-center reveal" style="margin-top:2rem;font-size:0.88rem;">
+        💡 Trabajamos con pagos parciales: <strong style="color:var(--white);">50% al inicio</strong> y <strong style="color:var(--white);">50% al entregar</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ CONTACT ═════ -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="text-center reveal" style="margin-bottom:4rem;">
+        <span class="section-tag">Hablemos</span>
+        <h2 class="section-title">¿Listo para tu próximo <span class="text-cyan">proyecto</span>?</h2>
+        <p class="section-subtitle">
+          Cuéntanos tu idea y te respondemos en menos de 24 horas con una propuesta
+          personalizada sin costo ni compromiso.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- WhatsApp -->
+        <div class="contact-info reveal">
+          <h2>Escríbenos<br /><span class="text-cyan">directamente</span></h2>
+          <p style="margin-top:1rem;margin-bottom:2rem;">
+            Prefiere el contacto rápido? Chatea con nosotros por WhatsApp y recibe
+            respuesta inmediata de nuestro equipo.
+          </p>
+
+          <div class="contact-wa">
+            <a href="https://wa.me/595981118297?text=Hola%2C%20me%20interesa%20un%20proyecto%20web"
+               target="_blank" rel="noopener noreferrer" class="wa-card">
+              <div class="wa-icon">💬</div>
+              <div class="wa-card-text">
+                <strong>Chat de WhatsApp</strong>
+                <span>+58 412-123-4567 · Respuesta rápida</span>
+              </div>
+            </a>
+
+            <a href="mailto:contacto@genesis-dev.com" class="wa-card"
+               style="border-color:rgba(0,212,255,0.2);">
+              <div class="wa-icon" style="background:rgba(0,212,255,0.1);font-size:1.3rem;">✉️</div>
+              <div class="wa-card-text">
+                <strong>Correo Electrónico</strong>
+                <span>contacto@genesis-dev.com</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="contact-form-wrap reveal reveal-delay-2">
+          <p class="form-title">Cuéntanos tu proyecto</p>
+          <form id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre o Empresa *</label>
+                <input type="text" id="nombre" name="nombre"
+                       placeholder="Tu nombre o razón social" required />
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono"
+                       placeholder="+58 412 000 0000" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Correo Electrónico *</label>
+              <input type="email" id="email" name="email"
+                     placeholder="tu@correo.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="descripcion">Descripción del Proyecto *</label>
+              <textarea id="descripcion" name="descripcion"
+                        placeholder="Cuéntanos: ¿qué necesitas? ¿tienes fecha límite? ¿algún referente visual que te guste?"
+                        required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">
+              Enviar Mensaje ✦
+            </button>
+            <div class="form-success">
+              ✅ ¡Mensaje enviado! Te contactaremos pronto.
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ FOOTER ═════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <span class="nav-logo-text">Génesis <span style="color:var(--cyan)">Dev</span></span>
+          <p>
+            Transformamos ideas en experiencias digitales que conectan
+            marcas con personas en el mundo web.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#services">Desarrollo Web</a></li>
+            <li><a href="#services">Diseño UI/UX</a></li>
+            <li><a href="#services">E-commerce</a></li>
+            <li><a href="#services">Aplicaciones Web</a></li>
+            <li><a href="#services">SEO</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#about">Sobre Nosotros</a></li>
+            <li><a href="#projects">Portafolio</a></li>
+            <li><a href="#payment">Métodos de Pago</a></li>
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p style="color:var(--muted);">
+          © 2025 Génesis Development Service. Todos los derechos reservados.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" title="Instagram">📸</a>
+          <a href="#" class="social-btn" title="LinkedIn">💼</a>
+          <a href="#" class="social-btn" title="GitHub">💻</a>
+          <a href="https://wa.me/595981118297" class="social-btn" title="WhatsApp" target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp floating button -->
+  <a href="https://wa.me/595981118297?text=Hola%2C%20quiero%20información%20sobre%20sus%20servicios"
+     class="wa-float" target="_blank" rel="noopener noreferrer" title="Chatear por WhatsApp">
+    <div class="wa-float-ring"></div>
+    💬
+  </a>
+
+  <!-- Scripts -->
+  <script src="js/shader.js?v=6"></script>
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>
