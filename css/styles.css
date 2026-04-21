@@ -389,14 +389,14 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 }
 .values-list li .icon {
   flex-shrink: 0;
-  width: 28px; height: 28px;
+  width: 32px; height: 32px;
   border-radius: 6px;
   background: rgba(0,212,255,0.1);
   border: 1px solid rgba(0,212,255,0.2);
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.85rem;
   margin-top: 2px;
 }
+.values-list li .icon svg { width: 16px; height: 16px; color: var(--cyan); }
 
 /* ─── SERVICES ─────────────────────────────────────────────── */
 #services { background: var(--bg2); }
@@ -431,9 +431,9 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   background: rgba(0,212,255,0.1);
   border: 1px solid rgba(0,212,255,0.2);
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
   margin-bottom: 1.25rem;
 }
+.service-icon svg { width: 24px; height: 24px; color: var(--cyan); }
 .service-card h3 { color: var(--white); margin-bottom: 0.6rem; }
 .service-card p { font-size: 0.9rem; line-height: 1.6; }
 
@@ -516,10 +516,15 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   box-shadow: var(--shadow-cyan);
 }
 .payment-icon {
-  font-size: 2.2rem;
   margin-bottom: 0.75rem;
-  display: block;
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  background: rgba(0,212,255,0.08);
+  border-radius: 10px;
+  border: 1px solid rgba(0,212,255,0.2);
+  margin-left: auto; margin-right: auto;
 }
+.payment-icon svg { width: 24px; height: 24px; color: var(--cyan); }
 .payment-card h3 { font-size: 1rem; color: var(--white); margin-bottom: 0.35rem; }
 .payment-card p  { font-size: 0.82rem; }
 
