@@ -498,43 +498,27 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   font-size: 2rem;
 }
 .project-card:hover .project-overlay { opacity: 1; }
-.project-logo-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 2.5rem 2rem;
-  background: #f5f0ee;
-  border-radius: var(--radius);
-  text-decoration: none;
-  position: relative;
-  transition: var(--transition);
-  border: 1px solid rgba(255,255,255,0.06);
-}
-.project-logo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-.project-logo-card .project-logo-img {
-  width: 60%;
-  max-width: 240px;
-  object-fit: contain;
-}
-.project-logo-name {
+.project-text-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
   font-family: 'TAN Pearl', serif;
-  font-size: 0.85rem;
-  color: #3a2228;
-  letter-spacing: 0.12em;
-  text-align: center;
+  font-size: clamp(3rem, 10vw, 6rem);
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color var(--transition);
+  position: relative;
 }
-.project-logo-arrow {
-  position: absolute;
-  top: 1rem;
-  right: 1.1rem;
-  font-size: 1.1rem;
-  color: #3a2228;
+.project-text-link:hover { color: var(--cyan); }
+.project-text-arrow {
+  font-family: var(--font-head);
+  font-size: 0.35em;
   opacity: 0;
-  transition: var(--transition);
+  transition: opacity var(--transition);
+  vertical-align: super;
 }
-.project-logo-card:hover .project-logo-arrow { opacity: 1; }
+.project-text-link:hover .project-text-arrow { opacity: 1; }
 .project-info { padding: 1.25rem 1.5rem; }
 .project-info h3 { color: var(--white); font-size: 1.05rem; margin-bottom: 0.4rem; }
 .project-info p { font-size: 0.85rem; margin-bottom: 0.75rem; }
