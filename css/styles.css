@@ -510,7 +510,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   transition: color var(--transition);
   position: relative;
 }
-.project-text-link:hover { color: var(--cyan); }
+.project-text-link:hover { color: #c97b8a; }
 .project-text-arrow {
   font-family: var(--font-head);
   font-size: 0.35em;
