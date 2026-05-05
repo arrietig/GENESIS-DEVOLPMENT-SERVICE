@@ -1,3 +1,12 @@
+/* ─── Custom Fonts ──────────────────────────────────────────── */
+@font-face {
+  font-family: 'TAN Pearl';
+  src: url('../assets/TAN-Pearl-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── Reset & Base ─────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -489,14 +498,43 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   font-size: 2rem;
 }
 .project-card:hover .project-overlay { opacity: 1; }
-.project-thumb--logo::after { display: none; }
-.project-logo-img {
-  width: 65%;
-  max-width: 260px;
-  object-fit: contain;
+.project-logo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2.5rem 2rem;
+  background: #f5f0ee;
+  border-radius: var(--radius);
+  text-decoration: none;
   position: relative;
-  z-index: 1;
+  transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.06);
 }
+.project-logo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+.project-logo-card .project-logo-img {
+  width: 60%;
+  max-width: 240px;
+  object-fit: contain;
+}
+.project-logo-name {
+  font-family: 'TAN Pearl', serif;
+  font-size: 0.85rem;
+  color: #3a2228;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+.project-logo-arrow {
+  position: absolute;
+  top: 1rem;
+  right: 1.1rem;
+  font-size: 1.1rem;
+  color: #3a2228;
+  opacity: 0;
+  transition: var(--transition);
+}
+.project-logo-card:hover .project-logo-arrow { opacity: 1; }
 .project-info { padding: 1.25rem 1.5rem; }
 .project-info h3 { color: var(--white); font-size: 1.05rem; margin-bottom: 0.4rem; }
 .project-info p { font-size: 0.85rem; margin-bottom: 0.75rem; }
