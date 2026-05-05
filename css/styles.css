@@ -379,6 +379,8 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 }
 .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
 .about-text .section-subtitle { margin-bottom: 2rem; }
+.mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+@media (max-width: 540px) { .mv-grid { grid-template-columns: 1fr; } }
 .values-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
 .values-list li {
   display: flex;
