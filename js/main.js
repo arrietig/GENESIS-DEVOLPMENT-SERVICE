@@ -98,7 +98,15 @@ form?.addEventListener('submit', (e) => {
     `\n*Proyecto:*\n${descripcion}`;
 
   const url = `https://wa.me/595981118297?text=${encodeURIComponent(msg)}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
+
+  // Fallback robusto: <a target="_blank"> simulado evita bloqueos de popup
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 });
 
 /* ── Smooth anchor scroll ───────────────────────────────── */
