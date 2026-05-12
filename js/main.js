@@ -76,24 +76,29 @@ function typewriter(el, words, speed = 90, pause = 2200) {
 const twEl = document.querySelector('.typewriter');
 if (twEl) typewriter(twEl, twEl.dataset.words.split('|'));
 
-/* ── Contact form ───────────────────────────────────────── */
+/* ── Contact form → WhatsApp ───────────────────────────── */
 const form = document.getElementById('contact-form');
 form?.addEventListener('submit', (e) => {
   e.preventDefault();
-  const btn = form.querySelector('.form-submit');
-  const success = form.querySelector('.form-success');
 
-  btn.disabled = true;
-  btn.textContent = 'Enviando...';
+  const nombre = form.nombre.value.trim();
+  const telefono = form.telefono.value.trim();
+  const email = form.email.value.trim();
+  const descripcion = form.descripcion.value.trim();
 
-  // Simulate async send (replace with actual fetch to your backend)
-  setTimeout(() => {
-    form.reset();
-    btn.disabled = false;
-    btn.textContent = 'Enviar Mensaje';
-    success.style.display = 'block';
-    setTimeout(() => { success.style.display = 'none'; }, 5000);
-  }, 1200);
+  if (!nombre || !email || !descripcion) {
+    form.reportValidity();
+    return;
+  }
+
+  const msg =
+    `Hola, soy *${nombre}*.\n\n` +
+    `*Correo:* ${email}\n` +
+    (telefono ? `*Teléfono:* ${telefono}\n` : '') +
+    `\n*Proyecto:*\n${descripcion}`;
+
+  const url = `https://wa.me/595981118297?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
 });
 
 /* ── Smooth anchor scroll ───────────────────────────────── */
