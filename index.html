@@ -235,7 +235,7 @@
             <div class="stack-item"><img src="https://cdn.simpleicons.org/javascript/00d4ff" alt="JavaScript"><span>JavaScript</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/typescript/00d4ff" alt="TypeScript"><span>TypeScript</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/html5/00d4ff" alt="HTML5"><span>HTML5</span></div>
-            <div class="stack-item"><img src="https://cdn.simpleicons.org/css3/00d4ff" alt="CSS3"><span>CSS3</span></div>
+            <div class="stack-item"><img src="https://cdn.simpleicons.org/css/00d4ff" alt="CSS3"><span>CSS3</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/tailwindcss/00d4ff" alt="Tailwind CSS"><span>Tailwind CSS</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/react/00d4ff" alt="React"><span>React</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/nextdotjs/00d4ff" alt="Next.js"><span>Next.js</span></div>
@@ -246,7 +246,7 @@
             <div class="stack-item"><img src="https://cdn.simpleicons.org/javascript/00d4ff" alt="JavaScript"><span>JavaScript</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/typescript/00d4ff" alt="TypeScript"><span>TypeScript</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/html5/00d4ff" alt="HTML5"><span>HTML5</span></div>
-            <div class="stack-item"><img src="https://cdn.simpleicons.org/css3/00d4ff" alt="CSS3"><span>CSS3</span></div>
+            <div class="stack-item"><img src="https://cdn.simpleicons.org/css/00d4ff" alt="CSS3"><span>CSS3</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/tailwindcss/00d4ff" alt="Tailwind CSS"><span>Tailwind CSS</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/react/00d4ff" alt="React"><span>React</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/nextdotjs/00d4ff" alt="Next.js"><span>Next.js</span></div>
@@ -266,8 +266,8 @@
             <div class="stack-item"><img src="https://cdn.simpleicons.org/amazonaws/00d4ff" alt="AWS"><span>AWS</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/cloudflare/00d4ff" alt="Cloudflare"><span>Cloudflare</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/vercel/00d4ff" alt="Vercel"><span>Vercel</span></div>
-            <div class="stack-item"><img src="https://cdn.simpleicons.org/canva/00d4ff" alt="Canva"><span>Canva</span></div>
-            <div class="stack-item"><img src="https://cdn.simpleicons.org/capcut/00d4ff" alt="CapCut"><span>CapCut</span></div>
+            <div class="stack-item"><img src="https://api.iconify.design/simple-icons:canva.svg?color=%2300d4ff&width=52&height=52" alt="Canva"><span>Canva</span></div>
+            <div class="stack-item"><img src="https://api.iconify.design/simple-icons:capcut.svg?color=%2300d4ff&width=52&height=52" alt="CapCut"><span>CapCut</span></div>
             <!-- set 2 (copia para loop infinito) -->
             <div class="stack-item"><img src="https://cdn.simpleicons.org/docker/00d4ff" alt="Docker"><span>Docker</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/git/00d4ff" alt="Git"><span>Git</span></div>
@@ -277,8 +277,8 @@
             <div class="stack-item"><img src="https://cdn.simpleicons.org/amazonaws/00d4ff" alt="AWS"><span>AWS</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/cloudflare/00d4ff" alt="Cloudflare"><span>Cloudflare</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/vercel/00d4ff" alt="Vercel"><span>Vercel</span></div>
-            <div class="stack-item"><img src="https://cdn.simpleicons.org/canva/00d4ff" alt="Canva"><span>Canva</span></div>
-            <div class="stack-item"><img src="https://cdn.simpleicons.org/capcut/00d4ff" alt="CapCut"><span>CapCut</span></div>
+            <div class="stack-item"><img src="https://api.iconify.design/simple-icons:canva.svg?color=%2300d4ff&width=52&height=52" alt="Canva"><span>Canva</span></div>
+            <div class="stack-item"><img src="https://api.iconify.design/simple-icons:capcut.svg?color=%2300d4ff&width=52&height=52" alt="CapCut"><span>CapCut</span></div>
           </div>
         </div>
       </div>
@@ -505,6 +505,28 @@
   <script src="js/shader.js?v=6"></script>
   <script src="js/main.js?v=3"></script>
   <script>lucide.createIcons();</script>
+  <script>
+    /* ── Stack icon fallback: si simpleicons falla, usa Iconify ── */
+    (function () {
+      const slugMap = {
+        'Python':'python','Java':'openjdk','JavaScript':'javascript',
+        'TypeScript':'typescript','HTML5':'html5','CSS3':'css',
+        'Tailwind CSS':'tailwindcss','React':'react','Next.js':'nextdotjs',
+        'Node.js':'nodedotjs','Docker':'docker','Git':'git',
+        'Supabase':'supabase','MongoDB':'mongodb','MySQL / SQL':'mysql',
+        'AWS':'amazonaws','Cloudflare':'cloudflare','Vercel':'vercel',
+        'Canva':'canva','CapCut':'capcut'
+      };
+      document.querySelectorAll('.stack-item img').forEach(function(img){
+        img.addEventListener('error', function(){
+          if(this.dataset.tried) return;
+          this.dataset.tried = '1';
+          var slug = slugMap[this.alt] || this.alt.toLowerCase().replace(/[^a-z0-9]/g,'');
+          this.src = 'https://api.iconify.design/simple-icons:' + slug + '.svg?color=%2300d4ff&width=52&height=52';
+        });
+      });
+    })();
+  </script>
   <script>
     window.addEventListener('load', function() {
       setTimeout(function() {
