@@ -555,6 +555,12 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   grid-template-columns: repeat(3,1fr);
   gap: 1.5rem;
 }
+.projects-row {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
 .project-card {
   border-radius: var(--radius);
   overflow: hidden;
@@ -626,10 +632,8 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--muted);
-  padding-left: 0.1em;
   transition: color var(--transition);
 }
-.project-entry:hover .project-subtitle { color: var(--cyan); }
 
 /* Logo image project link (GaDu. etc.) */
 .project-logo-link {
@@ -641,7 +645,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   position: relative;
 }
 .project-logo-img {
-  height: clamp(3rem, 10vw, 6rem);
+  height: clamp(3.8rem, 12.5vw, 7.5rem);
   width: auto;
   object-fit: contain;
   filter: brightness(1.15);
