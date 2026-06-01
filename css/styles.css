@@ -622,8 +622,8 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 .project-entry {
   display: inline-flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 .project-subtitle {
   font-family: 'Josefin Sans', sans-serif;
