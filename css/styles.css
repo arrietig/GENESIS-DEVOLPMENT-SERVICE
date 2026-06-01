@@ -613,6 +613,24 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 }
 .project-text-link:hover .project-text-arrow { opacity: 1; }
 
+.project-entry {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+.project-subtitle {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.75rem, 1.6vw, 1rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-left: 0.1em;
+  transition: color var(--transition);
+}
+.project-entry:hover .project-subtitle { color: var(--cyan); }
+
 /* Logo image project link (GaDu. etc.) */
 .project-logo-link {
   display: inline-flex;
