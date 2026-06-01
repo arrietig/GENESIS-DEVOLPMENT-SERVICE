@@ -531,6 +531,23 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 }
 .stack-item:hover span { color: var(--cyan); }
 
+/* Íconos a color original → forzar cyan (ej: Java/DevIcons) */
+.stack-item img.icon-force-cyan {
+  filter:
+    brightness(0) saturate(100%)
+    invert(71%) sepia(98%) saturate(1471%) hue-rotate(155deg) brightness(1.05)
+    drop-shadow(0 0 10px rgba(0,212,255,.7))
+    drop-shadow(0 0 24px rgba(0,212,255,.35));
+}
+.stack-item:hover img.icon-force-cyan {
+  filter:
+    brightness(0) saturate(100%)
+    invert(71%) sepia(98%) saturate(1471%) hue-rotate(155deg) brightness(1.3)
+    drop-shadow(0 0 16px rgba(0,212,255,1))
+    drop-shadow(0 0 40px rgba(0,212,255,.6));
+  transform: scale(1.18) translateY(-4px);
+}
+
 /* ─── PROJECTS ─────────────────────────────────────────────── */
 #projects { background: var(--bg); }
 .projects-grid {
