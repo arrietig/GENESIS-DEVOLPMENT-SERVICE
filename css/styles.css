@@ -612,6 +612,36 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   vertical-align: super;
 }
 .project-text-link:hover .project-text-arrow { opacity: 1; }
+
+/* Logo image project link (GaDu. etc.) */
+.project-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: var(--transition);
+  position: relative;
+}
+.project-logo-img {
+  height: clamp(54px, 9vw, 88px);
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.15);
+  transition: filter var(--transition), transform var(--transition);
+}
+.project-logo-link:hover .project-logo-img {
+  filter: brightness(1.5) drop-shadow(0 0 14px rgba(255,255,255,0.3));
+  transform: translateY(-3px);
+}
+.project-logo-link .project-text-arrow {
+  font-family: var(--font-head);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--white);
+  opacity: 0;
+  transition: opacity var(--transition);
+  vertical-align: super;
+}
+.project-logo-link:hover .project-text-arrow { opacity: 1; }
 .project-info { padding: 1.25rem 1.5rem; }
 .project-info h3 { color: var(--white); font-size: 1.05rem; margin-bottom: 0.4rem; }
 .project-info p { font-size: 0.85rem; margin-bottom: 0.75rem; }
