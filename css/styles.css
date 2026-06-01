@@ -623,7 +623,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   position: relative;
 }
 .project-logo-img {
-  height: clamp(54px, 9vw, 88px);
+  height: clamp(3rem, 10vw, 6rem);
   width: auto;
   object-fit: contain;
   filter: brightness(1.15);
