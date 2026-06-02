@@ -1,0 +1,190 @@
+{
+  "name": "Genesis - Bot WhatsApp ATC (Groq)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "genesis-whatsapp",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "WhatsApp Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "genesis-wa-bot"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [
+            {
+              "id": "verify-token",
+              "leftValue": "={{ $json.query['hub.mode'] }}",
+              "rightValue": "subscribe",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "check-verification",
+      "name": "¿Verificación Meta?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.query['hub.challenge'] }}",
+        "options": { "responseCode": 200 }
+      },
+      "id": "respond-challenge",
+      "name": "Responder Challenge",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [680, 160]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\n\nconst entry = body?.entry?.[0];\nconst changes = entry?.changes?.[0];\nconst value = changes?.value;\nconst message = value?.messages?.[0];\n\nif (!message || message.type !== 'text') {\n  return [{ json: { skip: true } }];\n}\n\nreturn [{\n  json: {\n    phone: message.from,\n    text: message.text.body,\n    messageId: message.id,\n    timestamp: message.timestamp\n  }\n}];"
+      },
+      "id": "extract-message",
+      "name": "Extraer Mensaje",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 440]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "skip-check",
+              "leftValue": "={{ $json.skip }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "check-skip",
+      "name": "¿Saltar?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 440]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Sos el asistente virtual de GÉNESIS Development Service, una agencia de desarrollo web profesional con base en Paraguay.\\n\\nRespondés en español paraguayo, de forma amigable, clara y profesional.\\n\\nSERVICIOS: Desarrollo Web, Diseño UI/UX, E-commerce, Aplicaciones Web, Bots de WhatsApp, Mantenimiento Web.\\n\\nPAGOS: 30% al inicio, 70% al entregar. Efectivo (guaraníes/dólares) o transferencia bancaria.\\n\\nCONTACTO: +595 981 118 297 | genesisdevelopmentpy@gmail.com | www.genesis.com.py\\n\\nPROYECTOS: ALEXIA Home Studio (www.alexiahome.com.py), GaDu. store (www.gadustore.com.py)\\n\\nREGLAS:\\n- Sé breve (máximo 3-4 líneas)\\n- Precios: son personalizados, ofrecé una llamada gratuita\\n- Si no sabés algo, derivá al equipo\\n- Terminá siempre con una invitación a la acción\\n- Emojis con moderación\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"={{ $json.text }}\"\n    }\n  ],\n  \"max_tokens\": 300,\n  \"temperature\": 0.7\n}",
+        "options": {}
+      },
+      "id": "groq-api",
+      "name": "Groq AI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 340]
+    },
+    {
+      "parameters": {
+        "jsCode": "const aiResponse = $input.first().json;\nconst reply = aiResponse.choices?.[0]?.message?.content ?? 'Hola 👋 En este momento no puedo responder. Escribinos directamente al +595 981 118 297.';\n\nreturn [{\n  json: {\n    phone: $('Extraer Mensaje').first().json.phone,\n    reply: reply.trim()\n  }\n}];"
+      },
+      "id": "prepare-reply",
+      "name": "Preparar Respuesta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 340]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{ $env.WHATSAPP_PHONE_ID }}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $env.WHATSAPP_TOKEN }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $json.phone }}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"{{ $json.reply }}\"\n  }\n}",
+        "options": {}
+      },
+      "id": "send-whatsapp",
+      "name": "Enviar WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1560, 340]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "OK",
+        "options": { "responseCode": 200 }
+      },
+      "id": "respond-ok",
+      "name": "Responder 200 OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1780, 340]
+    }
+  ],
+  "connections": {
+    "WhatsApp Webhook": {
+      "main": [[{ "node": "¿Verificación Meta?", "type": "main", "index": 0 }]]
+    },
+    "¿Verificación Meta?": {
+      "main": [
+        [{ "node": "Responder Challenge", "type": "main", "index": 0 }],
+        [{ "node": "Extraer Mensaje", "type": "main", "index": 0 }]
+      ]
+    },
+    "Extraer Mensaje": {
+      "main": [[{ "node": "¿Saltar?", "type": "main", "index": 0 }]]
+    },
+    "¿Saltar?": {
+      "main": [
+        [],
+        [{ "node": "Groq AI", "type": "main", "index": 0 }]
+      ]
+    },
+    "Groq AI": {
+      "main": [[{ "node": "Preparar Respuesta", "type": "main", "index": 0 }]]
+    },
+    "Preparar Respuesta": {
+      "main": [[{ "node": "Enviar WhatsApp", "type": "main", "index": 0 }]]
+    },
+    "Enviar WhatsApp": {
+      "main": [[{ "node": "Responder 200 OK", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": ["genesis", "whatsapp", "bot", "groq"],
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
