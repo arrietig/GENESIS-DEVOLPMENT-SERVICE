@@ -1,4 +1,4 @@
-/* ─── Custom Fonts ──────────────────────────────────────────── */
+/* custom fonts */
 @font-face {
   font-family: 'TAN Pearl';
   src: url('../assets/TAN-Pearl-Regular.woff2') format('woff2');
@@ -7,7 +7,7 @@
   font-display: swap;
 }
 
-/* ─── Reset & Base ─────────────────────────────────────────── */
+/* reset & base */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -39,22 +39,22 @@ body {
   line-height: 1.6;
 }
 
-/* ─── Scrollbar ────────────────────────────────────────────── */
+/* scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 3px; }
 
-/* ─── Selection ────────────────────────────────────────────── */
+/* selection */
 ::selection { background: rgba(0,212,255,0.25); color: var(--white); }
 
-/* ─── Typography ───────────────────────────────────────────── */
+/* typography */
 h1,h2,h3,h4 { font-family: var(--font-head); font-weight: 700; line-height: 1.15; }
 h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
 h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
 h3 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); }
 p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 
-/* ─── Utilities ────────────────────────────────────────────── */
+/* utilities */
 .container { width: 92%; max-width: 1180px; margin: 0 auto; }
 .section    { padding: 100px 0; }
 .section-tag {
@@ -77,7 +77,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 .text-center { text-align: center; }
 .text-center .section-subtitle { margin-left: auto; margin-right: auto; }
 
-/* ─── Buttons ──────────────────────────────────────────────── */
+/* buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -122,7 +122,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   transform: translateY(-2px);
 }
 
-/* ─── NAV ──────────────────────────────────────────────────── */
+/* nav */
 #navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -216,7 +216,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   transition: var(--transition);
 }
 
-/* ─── HERO ─────────────────────────────────────────────────── */
+/* hero */
 #hero {
   position: relative;
   min-height: 100vh;
@@ -333,7 +333,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   from { opacity:0; } to { opacity:1; }
 }
 
-/* ─── ABOUT ────────────────────────────────────────────────── */
+/* about */
 #about { background: var(--bg); }
 .about-grid {
   display: grid;
@@ -416,7 +416,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 }
 .values-list li .icon svg { width: 16px; height: 16px; color: var(--cyan); }
 
-/* ─── SERVICES ─────────────────────────────────────────────── */
+/* services */
 #services { background: var(--bg2); }
 .services-grid {
   display: grid;
@@ -455,7 +455,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 .service-card h3 { color: var(--white); margin-bottom: 0.6rem; }
 .service-card p { font-size: 0.9rem; line-height: 1.6; }
 
-/* ─── STACK CAROUSEL ───────────────────────────────────────── */
+/* stack carousel */
 #stack { background: var(--bg2); }
 
 .stack-carousel {
@@ -548,7 +548,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   transform: scale(1.18) translateY(-4px);
 }
 
-/* ─── PROJECTS ─────────────────────────────────────────────── */
+/* projects */
 #projects { background: var(--bg); }
 .projects-grid {
   display: grid;
@@ -678,7 +678,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   color: var(--cyan);
 }
 
-/* ─── PAYMENT ──────────────────────────────────────────────── */
+/* payment */
 #payment { background: var(--bg2); }
 .payment-grid {
   display: grid;
@@ -713,7 +713,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
 .payment-card h3 { font-size: 1rem; color: var(--white); margin-bottom: 0.35rem; }
 .payment-card p  { font-size: 0.82rem; }
 
-/* ─── CONTACT ──────────────────────────────────────────────── */
+/* contact */
 #contact { background: var(--bg); }
 .contact-grid {
   display: grid;
@@ -808,7 +808,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); color: var(--muted); }
   margin-top: 1rem;
 }
 
-/* ─── FOOTER ───────────────────────────────────────────────── */
+/* footer */
 footer {
   background: #020408;
   border-top: 1px solid var(--border);
@@ -850,7 +850,7 @@ footer {
 }
 .social-btn:hover { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.12); transform: translateY(-2px); }
 
-/* ─── WhatsApp Float ───────────────────────────────────────── */
+/* whatsapp float */
 .wa-float {
   position: fixed;
   bottom: 30px;
@@ -877,7 +877,7 @@ footer {
 @keyframes floatPop { from { opacity:0; transform:scale(0.3); } to { opacity:1; transform:scale(1); } }
 @keyframes ringPulse { 0%,100% { transform:scale(1); opacity:0.4; } 50% { transform:scale(1.25); opacity:0; } }
 
-/* ─── Reveal animation ─────────────────────────────────────── */
+/* reveal animation */
 .reveal { opacity:0; transform:translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 .reveal-delay-1 { transition-delay: 0.1s; }
@@ -886,7 +886,7 @@ footer {
 .reveal-delay-4 { transition-delay: 0.4s; }
 .reveal-delay-5 { transition-delay: 0.5s; }
 
-/* ─── MOBILE ───────────────────────────────────────────────── */
+/* mobile */
 @media (max-width: 900px) {
   .about-grid,
   .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -922,7 +922,7 @@ footer {
 }
 #navbar.nav-open .nav-cta { display: block; margin-left: 0; }
 
-/* ─── Preloader ──────────────────────────────────────────────── */
+/* preloader */
 #preloader {
   position: fixed;
   inset: 0;

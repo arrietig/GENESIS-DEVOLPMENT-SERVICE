@@ -1,4 +1,4 @@
-/* ── Nav scroll ─────────────────────────────────────────── */
+// nav scroll
 const navbar = document.getElementById('navbar');
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
@@ -16,7 +16,7 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-/* ── Mobile hamburger ───────────────────────────────────── */
+// mobile hamburger
 const hamburger = document.querySelector('.hamburger');
 hamburger?.addEventListener('click', () => {
   navbar.classList.toggle('nav-open');
@@ -25,13 +25,13 @@ document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', () => navbar.classList.remove('nav-open'));
 });
 
-/* ── Reveal on scroll ───────────────────────────────────── */
+// reveal on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-/* ── Counter animation ──────────────────────────────────── */
+// counter animation
 function animateCounter(el) {
   const target = parseInt(el.dataset.target, 10);
   const suffix = el.dataset.suffix || '';
@@ -56,7 +56,7 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.stat-number[data-target]').forEach(el => counterObserver.observe(el));
 
-/* ── Typewriter effect ──────────────────────────────────── */
+// typewriter effect
 function typewriter(el, words, speed = 90, pause = 2200) {
   let wi = 0, ci = 0, deleting = false;
   const tick = () => {
@@ -76,7 +76,7 @@ function typewriter(el, words, speed = 90, pause = 2200) {
 const twEl = document.querySelector('.typewriter');
 if (twEl) typewriter(twEl, twEl.dataset.words.split('|'));
 
-/* ── Contact form → WhatsApp ───────────────────────────── */
+// contact form → whatsapp
 const form = document.getElementById('contact-form');
 form?.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -109,7 +109,7 @@ form?.addEventListener('submit', (e) => {
   document.body.removeChild(a);
 });
 
-/* ── Smooth anchor scroll ───────────────────────────────── */
+// smooth anchor scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
@@ -119,7 +119,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-/* ── Init shader ─────────────────────────────────────────── */
+// init shader
 window.addEventListener('DOMContentLoaded', () => {
   new AuroraShader('shader-canvas');
 });

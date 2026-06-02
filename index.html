@@ -37,7 +37,7 @@
 </head>
 <body>
 
-  <!-- ═════════ PRELOADER ═══ -->
+  <!-- preloader -->
   <div id="preloader">
     <div class="preloader-content">
       <img src="assets/logo-icon.png" alt="Génesis" class="preloader-icon" />
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <!-- ═════════ NAV ═══ -->
+  <!-- nav -->
   <nav id="navbar">
     <div class="container">
       <div class="nav-inner">
@@ -75,7 +75,7 @@
     </div>
   </nav>
 
-  <!-- ═══════════════════════════════════════ HERO ══ -->
+  <!-- hero -->
   <section id="hero">
     <canvas id="shader-canvas"></canvas>
     <div class="hero-overlay"></div>
@@ -114,7 +114,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ ABOUT ═ -->
+  <!-- about -->
   <section id="about" class="section">
     <div class="container">
       <div class="about-grid">
@@ -159,7 +159,7 @@
     </div>
   </section>
 
-  <!-- ════════════════════════════════════ SERVICES ══ -->
+  <!-- services -->
   <section id="services" class="section">
     <div class="container">
       <div class="text-center reveal">
@@ -213,7 +213,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════ STACK ══════ -->
+  <!-- stack -->
   <section id="stack" class="section">
     <div class="container">
       <div class="text-center reveal">
@@ -226,10 +226,9 @@
       </div>
 
       <div class="stack-carousel reveal">
-        <!-- Fila 1 → scroll izquierda -->
+        
         <div class="stack-row">
           <div class="stack-track track-left">
-            <!-- set 1 -->
             <div class="stack-item"><img src="https://cdn.simpleicons.org/python/00d4ff" alt="Python"><span>Python</span></div>
             <div class="stack-item"><img src="assets/logo-java.png" alt="Java"><span>Java</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/javascript/00d4ff" alt="JavaScript"><span>JavaScript</span></div>
@@ -240,7 +239,6 @@
             <div class="stack-item"><img src="https://cdn.simpleicons.org/react/00d4ff" alt="React"><span>React</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/nextdotjs/00d4ff" alt="Next.js"><span>Next.js</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/nodedotjs/00d4ff" alt="Node.js"><span>Node.js</span></div>
-            <!-- set 2 (copia para loop infinito) -->
             <div class="stack-item"><img src="https://cdn.simpleicons.org/python/00d4ff" alt="Python"><span>Python</span></div>
             <div class="stack-item"><img src="assets/logo-java.png" alt="Java"><span>Java</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/javascript/00d4ff" alt="JavaScript"><span>JavaScript</span></div>
@@ -254,10 +252,9 @@
           </div>
         </div>
 
-        <!-- Fila 2 → scroll derecha -->
+        
         <div class="stack-row" style="margin-top:2rem">
           <div class="stack-track track-right">
-            <!-- set 1 -->
             <div class="stack-item"><img src="https://cdn.simpleicons.org/docker/00d4ff" alt="Docker"><span>Docker</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/git/00d4ff" alt="Git"><span>Git</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/supabase/00d4ff" alt="Supabase"><span>Supabase</span></div>
@@ -270,7 +267,6 @@
             <div class="stack-item"><img src="assets/logo-photoshop.png" alt="Photoshop"><span>Photoshop</span></div>
             <div class="stack-item"><img src="assets/logo-postgresql.png" alt="PostgreSQL"><span>PostgreSQL</span></div>
             <div class="stack-item"><img src="assets/logo-n8n.png" alt="n8n"><span>n8n</span></div>
-            <!-- set 2 (copia para loop infinito) -->
             <div class="stack-item"><img src="https://cdn.simpleicons.org/docker/00d4ff" alt="Docker"><span>Docker</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/git/00d4ff" alt="Git"><span>Git</span></div>
             <div class="stack-item"><img src="https://cdn.simpleicons.org/supabase/00d4ff" alt="Supabase"><span>Supabase</span></div>
@@ -289,7 +285,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════ PROJECTS ════ -->
+  <!-- projects -->
   <section id="projects" class="section">
     <div class="container">
       <div class="text-center reveal">
@@ -316,7 +312,7 @@
     </div>
   </section>
 
-  <!-- ════════════════════════════════════ PAYMENT ═══ -->
+  <!-- payment -->
   <section id="payment" class="section">
     <div class="container">
       <div class="text-center reveal">
@@ -351,7 +347,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════ CONTACT ═════ -->
+  <!-- contact -->
   <section id="contact" class="section">
     <div class="container">
       <div class="text-center reveal" style="margin-bottom:4rem;">
@@ -437,7 +433,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════ FOOTER ═════ -->
+  <!-- footer -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -515,7 +511,7 @@
   <script src="js/main.js?v=3"></script>
   <script>lucide.createIcons();</script>
   <script>
-    /* ── Stack icon fallback: si simpleicons falla, usa Iconify ── */
+    // fallback de iconos
     (function () {
       const slugMap = {
         'Python':'python','Java':'java','JavaScript':'javascript',
