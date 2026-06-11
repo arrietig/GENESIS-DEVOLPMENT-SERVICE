@@ -123,3 +123,96 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 window.addEventListener('DOMContentLoaded', () => {
   new AuroraShader('shader-canvas');
 });
+
+/* ── Génesis Chatbot Widget ─────────────────────────────── */
+(function() {
+  const root = document.getElementById('gx-chat');
+  if (!root) return;
+
+  const endpoint = root.dataset.endpoint;
+  const toggle   = document.getElementById('gx-chat-toggle');
+  const closeBtn = document.getElementById('gx-chat-close');
+  const msgs     = document.getElementById('gx-chat-msgs');
+  const form     = document.getElementById('gx-chat-form');
+  const input    = document.getElementById('gx-chat-input');
+  const send     = document.getElementById('gx-chat-send');
+
+  let history = [];
+  let isOpen  = false;
+  let isBusy  = false;
+
+  function openPanel() {
+    root.classList.add('open');
+    root.querySelector('.gx-chat-panel').setAttribute('aria-hidden', 'false');
+    isOpen = true;
+    if (history.length === 0) greet();
+    setTimeout(() => input.focus(), 250);
+  }
+  function closePanel() {
+    root.classList.remove('open');
+    root.querySelector('.gx-chat-panel').setAttribute('aria-hidden', 'true');
+    isOpen = false;
+  }
+  toggle.addEventListener('click', () => isOpen ? closePanel() : openPanel());
+  closeBtn.addEventListener('click', closePanel);
+
+  function escape(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function addMsg(role, text, isTyping) {
+    const div = document.createElement('div');
+    div.className = `gx-msg ${role}`;
+    div.innerHTML = `<div class="gx-msg-body">${
+      isTyping
+        ? '<div class="gx-typing"><span></span><span></span><span></span></div>'
+        : escape(text)
+    }</div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return div;
+  }
+
+  function greet() {
+    addMsg('bot', '¡Hola! Soy el asistente de Génesis. ¿En qué te ayudo?');
+  }
+
+  async function ask(text) {
+    history.push({ role: 'user', content: text });
+    const typing = addMsg('bot', '', true);
+    isBusy = true; send.disabled = true;
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history })
+      });
+      const data = await res.json();
+      typing.remove();
+
+      if (!res.ok || data.error) {
+        addMsg('bot', '⚠ Hubo un problema. Probá escribirnos directamente al WhatsApp: +595 981 118 297');
+        return;
+      }
+      const reply = data.reply || '(sin respuesta)';
+      history.push({ role: 'assistant', content: reply });
+      addMsg('bot', reply);
+    } catch (e) {
+      typing.remove();
+      addMsg('bot', '⚠ No pude conectar. Probá el WhatsApp: +595 981 118 297');
+    } finally {
+      isBusy = false; send.disabled = false;
+      input.focus();
+    }
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (isBusy) return;
+    const text = input.value.trim();
+    if (!text) return;
+    addMsg('user', text);
+    input.value = '';
+    ask(text);
+  });
+})();

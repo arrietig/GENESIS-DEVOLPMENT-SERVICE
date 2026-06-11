@@ -31,7 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&family=Noto+Serif:wght@300;400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=2" />
   <!-- Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
@@ -497,6 +497,45 @@
     </div>
   </footer>
 
+  <!-- Génesis Chatbot Widget -->
+  <div id="gx-chat" data-endpoint="https://genesis-chat.smrcartes.workers.dev">
+    <button id="gx-chat-toggle" class="gx-chat-toggle" aria-label="Abrir chat">
+      <span class="gx-chat-ring"></span>
+      <svg class="gx-chat-icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      <svg class="gx-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div id="gx-chat-panel" class="gx-chat-panel" aria-hidden="true">
+      <header class="gx-chat-header">
+        <div class="gx-chat-brand">
+          <span class="gx-chat-mark"></span>
+          <div class="gx-chat-title">
+            <strong>Génesis</strong>
+            <small><span class="gx-chat-dot"></span> En línea</small>
+          </div>
+        </div>
+        <button class="gx-chat-close" id="gx-chat-close" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </header>
+      <div class="gx-chat-msgs" id="gx-chat-msgs"></div>
+      <form class="gx-chat-composer" id="gx-chat-form">
+        <input type="text" id="gx-chat-input" placeholder="Escribí tu mensaje..." autocomplete="off" maxlength="500" />
+        <button type="submit" id="gx-chat-send" aria-label="Enviar">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- WhatsApp floating button -->
   <a href="https://wa.me/595981118297?text=Hola%2C%20quiero%20información%20sobre%20sus%20servicios"
      class="wa-float" target="_blank" rel="noopener noreferrer" title="Chatear por WhatsApp">
@@ -508,7 +547,7 @@
 
   <!-- Scripts -->
   <script src="js/shader.js?v=6"></script>
-  <script src="js/main.js?v=3"></script>
+  <script src="js/main.js?v=4"></script>
   <script>lucide.createIcons();</script>
   <script>
     // fallback de iconos

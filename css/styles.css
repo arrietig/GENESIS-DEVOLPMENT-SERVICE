@@ -853,18 +853,19 @@ footer {
 /* whatsapp float */
 .wa-float {
   position: fixed;
-  bottom: 30px;
+  bottom: 105px;
   right: 30px;
   z-index: 999;
-  width: 58px; height: 58px;
+  width: 52px; height: 52px;
   border-radius: 50%;
   background: #25d366;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   box-shadow: 0 4px 24px rgba(37,211,102,0.45);
   text-decoration: none;
   transition: var(--transition);
   animation: floatPop 0.5s 1.5s ease both;
+  color: #fff;
 }
 .wa-float:hover { transform: scale(1.12); box-shadow: 0 6px 32px rgba(37,211,102,0.6); }
 .wa-float-ring {
@@ -969,4 +970,168 @@ footer {
   color: var(--cyan);
   letter-spacing: 0.28em;
   text-transform: uppercase;
+}
+
+/* ─── Génesis Chatbot Widget ─────────────────────────────── */
+.gx-chat-toggle {
+  position: fixed;
+  bottom: 30px; right: 30px;
+  z-index: 1000;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00D4FF, #0095b8);
+  border: none;
+  cursor: pointer;
+  color: #04060f;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 28px rgba(0,212,255,0.45);
+  transition: var(--transition);
+  animation: floatPop 0.5s 1.5s ease both;
+}
+.gx-chat-toggle:hover { transform: scale(1.08); }
+.gx-chat-ring {
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,212,255,0.4);
+  animation: ringPulse 2.5s ease infinite;
+  pointer-events: none;
+}
+.gx-chat-icon-close { display: none; }
+.gx-chat.open .gx-chat-icon-chat { display: none; }
+.gx-chat.open .gx-chat-icon-close { display: block; }
+.gx-chat.open .gx-chat-toggle { background: #1a2540; color: #fff; }
+.gx-chat.open .gx-chat-ring { display: none; }
+
+.gx-chat-panel {
+  position: fixed;
+  bottom: 105px; right: 30px;
+  z-index: 999;
+  width: 360px; max-width: calc(100vw - 40px);
+  height: 540px; max-height: calc(100vh - 160px);
+  background: #0a1020;
+  border: 1px solid rgba(0,212,255,0.18);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.gx-chat.open .gx-chat-panel { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.gx-chat.open .wa-float { display: none; }
+
+.gx-chat-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.1rem;
+  background: linear-gradient(135deg, rgba(0,212,255,0.08), transparent);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.gx-chat-brand { display: flex; align-items: center; gap: 0.7rem; }
+.gx-chat-mark {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #00D4FF, #003040);
+  box-shadow: 0 0 14px rgba(0,212,255,0.4);
+  flex-shrink: 0;
+}
+.gx-chat-title { display: flex; flex-direction: column; line-height: 1.2; }
+.gx-chat-title strong { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; letter-spacing: 0.04em; }
+.gx-chat-title small { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; color: #8a93a8; margin-top: 2px; }
+.gx-chat-dot { width: 7px; height: 7px; border-radius: 50%; background: #2ee080; box-shadow: 0 0 8px rgba(46,224,128,0.7); }
+.gx-chat-close {
+  background: transparent; border: none; cursor: pointer; color: #8a93a8;
+  padding: 4px; border-radius: 6px; transition: color var(--transition);
+}
+.gx-chat-close:hover { color: #fff; }
+
+.gx-chat-msgs {
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex; flex-direction: column; gap: 0.7rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,212,255,0.3) transparent;
+}
+.gx-chat-msgs::-webkit-scrollbar { width: 6px; }
+.gx-chat-msgs::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.3); border-radius: 3px; }
+
+.gx-msg {
+  display: flex; gap: 0.5rem;
+  animation: gxSlide 0.3s ease;
+  max-width: 88%;
+}
+@keyframes gxSlide { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.gx-msg-body {
+  padding: 0.65rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #e8eef9;
+  background: #0e1628;
+  border-top-left-radius: 4px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.gx-msg.user { align-self: flex-end; }
+.gx-msg.user .gx-msg-body {
+  background: linear-gradient(135deg, #1a2540, #0e1628);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 4px;
+}
+.gx-typing { display: inline-flex; gap: 4px; align-items: center; padding: 4px 0; }
+.gx-typing span {
+  width: 6px; height: 6px;
+  background: #00D4FF;
+  border-radius: 50%;
+  animation: gxDot 1.2s infinite ease-in-out;
+}
+.gx-typing span:nth-child(2) { animation-delay: 0.2s; }
+.gx-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes gxDot {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.9); }
+  40%           { opacity: 1;   transform: scale(1.2); }
+}
+
+.gx-chat-composer {
+  display: flex; gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: rgba(4,6,15,0.5);
+}
+.gx-chat-composer input {
+  flex-grow: 1;
+  background: #0e1628;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #e8eef9;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.gx-chat-composer input:focus { border-color: rgba(0,212,255,0.5); }
+.gx-chat-composer input::placeholder { color: #5a657a; }
+.gx-chat-composer button {
+  background: #00D4FF; color: #04060f;
+  border: none; padding: 0 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.gx-chat-composer button:hover:not(:disabled) { background: #00b8e0; }
+.gx-chat-composer button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+@media (max-width: 480px) {
+  .gx-chat-panel {
+    width: calc(100vw - 24px);
+    bottom: 100px;
+    right: 12px;
+    height: calc(100vh - 140px);
+  }
+  .gx-chat-toggle { right: 16px; bottom: 20px; }
+  .wa-float { right: 16px; bottom: 90px; }
 }
