@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Génesis · Chatbot Test (Groq)</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:    #04060f;
+      --panel: #0a1020;
+      --line:  rgba(255,255,255,0.08);
+      --ink:   #e8eef9;
+      --muted: #8a93a8;
+      --cyan:  #00D4FF;
+      --cyan-dim: rgba(0,212,255,0.15);
+      --user:  #1a2540;
+      --bot:   #0e1628;
+      --radius: 14px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cyan); }
+
+    /* ─── Top bar ───────────────────────────────────── */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--line);
+      background: rgba(10,16,32,0.8);
+      backdrop-filter: blur(10px);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--cyan), #003040);
+      box-shadow: 0 0 18px rgba(0,212,255,0.4);
+    }
+    .brand-text { display: flex; flex-direction: column; line-height: 1; }
+    .brand-text strong { font-family: 'Playfair Display', serif; font-size: 1.1rem; letter-spacing: 0.05em; }
+    .brand-text small { font-size: 0.62rem; letter-spacing: 0.25em; color: var(--cyan); text-transform: uppercase; margin-top: 3px; }
+    .top-actions { display: flex; align-items: center; gap: 0.5rem; }
+    .top-btn {
+      padding: 0.5rem 0.9rem;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .top-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+    .top-btn.alert { border-color: rgba(255,90,90,0.4); color: #ff8585; }
+
+    /* ─── Layout ───────────────────────────────────── */
+    .stage {
+      flex-grow: 1;
+      display: flex; flex-direction: column;
+      max-width: 820px; width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem;
+      gap: 1rem;
+    }
+    .status-bar {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #555; }
+    .dot.live { background: #2ee080; box-shadow: 0 0 10px rgba(46,224,128,0.6); }
+
+    /* ─── Chat area ────────────────────────────────── */
+    .chat {
+      flex-grow: 1;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex; flex-direction: column;
+      gap: 1rem;
+      min-height: 400px;
+    }
+    .msg {
+      display: flex; gap: 0.75rem;
+      animation: slide 0.4s ease;
+    }
+    @keyframes slide {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .msg-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 600;
+    }
+    .msg.user .msg-avatar {
+      background: var(--user);
+      color: var(--cyan);
+    }
+    .msg.bot .msg-avatar {
+      background: radial-gradient(circle at 30% 30%, var(--cyan), #003040);
+      color: var(--bg);
+    }
+    .msg-body {
+      background: var(--bot);
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      border-top-left-radius: 4px;
+      max-width: 80%;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .msg.user { flex-direction: row-reverse; }
+    .msg.user .msg-body {
+      background: var(--user);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 4px;
+    }
+    .typing {
+      display: inline-flex; gap: 4px; align-items: center;
+    }
+    .typing span {
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: pulse-dot 1.2s infinite ease-in-out;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes pulse-dot {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.9); }
+      40%           { opacity: 1;   transform: scale(1.2); }
+    }
+    .meta {
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ─── Composer ─────────────────────────────────── */
+    .composer {
+      display: flex; gap: 0.6rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 0.6rem;
+    }
+    .composer textarea {
+      flex-grow: 1;
+      background: transparent;
+      border: none;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: none;
+      padding: 0.6rem 0.8rem;
+      min-height: 44px;
+      max-height: 160px;
+      outline: none;
+    }
+    .composer textarea::placeholder { color: var(--muted); }
+    .send-btn {
+      align-self: flex-end;
+      padding: 0.75rem 1.4rem;
+      background: var(--cyan);
+      color: var(--bg);
+      border: none;
+      border-radius: 10px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .send-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,212,255,0.3); }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ─── Modal ───────────────────────────────────── */
+    .modal-bg {
+      position: fixed; inset: 0;
+      background: rgba(4,6,15,0.85);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      z-index: 100;
+    }
+    .modal-bg.hidden { display: none; }
+    .modal {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 480px; width: 100%;
+    }
+    .modal h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.2rem; line-height: 1.55; }
+    .modal label { display: block; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .modal input, .modal select {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 0.92rem;
+      margin-bottom: 1rem;
+    }
+    .modal input:focus, .modal select:focus { outline: none; border-color: var(--cyan); }
+    .modal small.help { display: block; font-size: 0.75rem; color: var(--muted); margin-top: -0.7rem; margin-bottom: 1rem; }
+    .modal small.help a { text-decoration: underline; }
+    .modal-actions { display: flex; gap: 0.6rem; justify-content: flex-end; }
+    .btn-prim {
+      background: var(--cyan);
+      color: var(--bg);
+      border: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      padding: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .stage { padding: 1rem; }
+      .msg-body { max-width: 90%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Topbar ───────────────────────────────────── -->
+  <div class="topbar">
+    <a href="https://genesis.com.py" class="brand">
+      <div class="brand-mark"></div>
+      <div class="brand-text">
+        <strong>GÉNESIS</strong>
+        <small>Chatbot Test</small>
+      </div>
+    </a>
+    <div class="top-actions">
+      <button class="top-btn" id="btn-config">⚙ Config</button>
+      <button class="top-btn alert" id="btn-clear">Limpiar</button>
+    </div>
+  </div>
+
+  <!-- ─── Stage ───────────────────────────────────── -->
+  <div class="stage">
+    <div class="status-bar">
+      <div class="dot" id="status-dot"></div>
+      <span id="status-text">Sin configurar — abrí ⚙ Config para empezar</span>
+      <span style="margin-left:auto;" id="model-tag"></span>
+    </div>
+
+    <div class="chat" id="chat"></div>
+
+    <div class="composer">
+      <textarea id="input" placeholder="Escribí un mensaje..." rows="1"></textarea>
+      <button class="send-btn" id="send" disabled>Enviar</button>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    🔒 Tu API key se guarda únicamente en este navegador (localStorage). No se envía a ningún servidor de Génesis.
+  </div>
+
+  <!-- ─── Config Modal ─────────────────────────────── -->
+  <div class="modal-bg" id="modal-bg">
+    <div class="modal">
+      <h2>Configuración</h2>
+      <p>Pegá tu API key de Groq y elegí el modelo. Se guarda solo en este navegador.</p>
+
+      <label for="cfg-key">API Key de Groq</label>
+      <input type="password" id="cfg-key" placeholder="gsk_..." />
+      <small class="help">¿No tenés? Obtenela gratis en <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a></small>
+
+      <label for="cfg-model">Modelo</label>
+      <select id="cfg-model">
+        <option value="llama-3.3-70b-versatile">Llama 3.3 70B (recomendado)</option>
+        <option value="llama-3.1-8b-instant">Llama 3.1 8B (más rápido)</option>
+        <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+        <option value="gemma2-9b-it">Gemma 2 9B</option>
+      </select>
+
+      <div class="modal-actions">
+        <button class="btn-ghost" id="cfg-cancel">Cancelar</button>
+        <button class="btn-prim" id="cfg-save">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ═════ System Prompt — ATC Génesis ═════ */
+    const SYSTEM_PROMPT = `Sos el asistente virtual de atención al cliente de Génesis Development Service, una empresa paraguaya de desarrollo web fundada por Junior Arrieta.
+
+INFORMACIÓN DE LA EMPRESA:
+- Nombre: Génesis Development Service
+- Ubicación: Paraguay (atención remota a todo el país)
+- Sitio web: genesis.com.py
+- Email: genesisdevelopmentpy@gmail.com
+- WhatsApp: +595 981 118 297
+- Fundador: Junior Arrieta
+
+SERVICIOS QUE OFRECEMOS:
+1. **Páginas web profesionales** — Landing pages, sitios corporativos, portafolios
+2. **E-commerce** — Tiendas online con pasarela de pago y gestión de inventario
+3. **Aplicaciones web a medida** — Sistemas de reservas, paneles administrativos, CRMs
+4. **Diseño UI/UX** — Identidad visual, prototipos, experiencia de usuario
+5. **Mantenimiento y soporte** — Actualizaciones, mejoras y optimización SEO
+
+PROYECTOS REALIZADOS:
+- Alexia Beauty Home Studio (alexia-home-studio.vercel.app) — Sitio elegante para estudio de belleza con reservas online
+- Bodrüm Nails y Beauty Bar
+
+PROMOCIÓN ACTUAL (WRC 2026):
+En agosto de 2026 llega el WRC Rally Mundial a Paraguay. Estamos ofreciendo paquetes especiales para hoteles, posadas y hospedajes de Itapúa que quieran captar el turismo internacional con un sitio web profesional.
+
+FORMAS DE PAGO:
+- Transferencia bancaria (Paraguay)
+- Efectivo / divisa local
+
+TU PERSONALIDAD:
+- Sé cálido, profesional y directo
+- Hablás en español rioplatense/paraguayo natural (usá "vos", no "tú")
+- Sos breve: 2-4 oraciones por respuesta salvo que pidan detalle
+- Si te preguntan algo que no sabés, ofrecé contactar al equipo por WhatsApp: +595 981 118 297
+- Si detectás interés real, sugerí coordinar una llamada o reunión
+- No inventes precios específicos — decí que se cotiza según el proyecto
+
+OBJETIVO: Resolver dudas, generar interés y derivar leads calificados al WhatsApp del equipo.`;
+
+    /* ═════ State ═════ */
+    let cfg = JSON.parse(localStorage.getItem('genesis-bot-cfg') || '{}');
+    let messages = [];
+
+    const $ = id => document.getElementById(id);
+    const chat = $('chat');
+    const input = $('input');
+    const send = $('send');
+
+    /* ═════ Modal ═════ */
+    function openModal() {
+      $('cfg-key').value = cfg.key || '';
+      $('cfg-model').value = cfg.model || 'llama-3.3-70b-versatile';
+      $('modal-bg').classList.remove('hidden');
+    }
+    function closeModal() { $('modal-bg').classList.add('hidden'); }
+    $('btn-config').onclick = openModal;
+    $('cfg-cancel').onclick = closeModal;
+    $('cfg-save').onclick = () => {
+      cfg = {
+        key: $('cfg-key').value.trim(),
+        model: $('cfg-model').value
+      };
+      localStorage.setItem('genesis-bot-cfg', JSON.stringify(cfg));
+      closeModal();
+      updateStatus();
+      if (cfg.key && messages.length === 0) greet();
+    };
+
+    /* ═════ Status ═════ */
+    function updateStatus() {
+      const ok = !!cfg.key;
+      $('status-dot').classList.toggle('live', ok);
+      $('status-text').textContent = ok
+        ? 'Conectado a Groq'
+        : 'Sin configurar — abrí ⚙ Config para empezar';
+      $('model-tag').textContent = ok ? cfg.model : '';
+      send.disabled = !ok;
+      input.disabled = !ok;
+    }
+
+    /* ═════ Rendering ═════ */
+    function addMsg(role, text, isTyping = false) {
+      const div = document.createElement('div');
+      div.className = `msg ${role}`;
+      const avatar = role === 'user' ? 'VOS' : 'G';
+      const body = isTyping
+        ? '<div class="typing"><span></span><span></span><span></span></div>'
+        : escapeHtml(text);
+      div.innerHTML = `
+        <div class="msg-avatar">${avatar}</div>
+        <div>
+          <div class="msg-body">${body}</div>
+          ${isTyping ? '' : `<div class="meta">${new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' })}</div>`}
+        </div>
+      `;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+      return div;
+    }
+    function escapeHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function greet() {
+      chat.innerHTML = '';
+      messages = [];
+      addMsg('bot', '¡Hola! Soy el asistente de Génesis Development Service 👋\n\n¿En qué puedo ayudarte? Puedo contarte sobre nuestros servicios, proyectos o coordinar una reunión.');
+    }
+
+    $('btn-clear').onclick = () => { if (cfg.key) greet(); else { chat.innerHTML = ''; messages = []; } };
+
+    /* ═════ Groq call ═════ */
+    async function ask(userText) {
+      messages.push({ role: 'user', content: userText });
+
+      const typing = addMsg('bot', '', true);
+
+      try {
+        const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${cfg.key}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: cfg.model,
+            messages: [
+              { role: 'system', content: SYSTEM_PROMPT },
+              ...messages
+            ],
+            temperature: 0.7,
+            max_tokens: 500
+          })
+        });
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.error?.message || `HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+        const reply = data.choices?.[0]?.message?.content || '(sin respuesta)';
+        messages.push({ role: 'assistant', content: reply });
+
+        typing.remove();
+        addMsg('bot', reply);
+      } catch (e) {
+        typing.remove();
+        addMsg('bot', `⚠ Error: ${e.message}\n\nVerificá tu API key en ⚙ Config.`);
+      }
+    }
+
+    /* ═════ Composer ═════ */
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 160) + 'px';
+    });
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+    send.onclick = sendMessage;
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text || !cfg.key) return;
+      addMsg('user', text);
+      input.value = '';
+      input.style.height = 'auto';
+      ask(text);
+    }
+
+    /* ═════ Init ═════ */
+    updateStatus();
+    if (cfg.key) greet();
+    else openModal();
+  </script>
+</body>
+</html>
