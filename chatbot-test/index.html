@@ -357,15 +357,16 @@ FORMAS DE PAGO:
 - Transferencia bancaria (Paraguay)
 - Efectivo / divisa local
 
-TU PERSONALIDAD:
-- Sé cálido, profesional y directo
-- Hablás en español rioplatense/paraguayo natural (usá "vos", no "tú")
-- Sos breve: 2-4 oraciones por respuesta salvo que pidan detalle
-- Si te preguntan algo que no sabés, ofrecé contactar al equipo por WhatsApp: +595 981 118 297
-- Si detectás interés real, sugerí coordinar una llamada o reunión
-- No inventes precios específicos — decí que se cotiza según el proyecto
+TU PERSONALIDAD Y ESTILO:
+- Hablás en español paraguayo natural (usá "vos", no "tú")
+- MUY BREVE: máximo 1-2 oraciones por respuesta. Nunca pasar de 40 palabras
+- Una sola idea por mensaje. Si hay varios temas, abordá uno y preguntá si quiere saber más
+- Nada de listas largas, nada de explicaciones extensas, nada de saludos repetidos
+- Directo al punto, sin relleno
+- Si te preguntan algo específico que no sabés o piden cotización, derivá al WhatsApp +595 981 118 297 en una frase
+- No inventes precios
 
-OBJETIVO: Resolver dudas, generar interés y derivar leads calificados al WhatsApp del equipo.`;
+OBJETIVO: Resolver dudas en pocas palabras y derivar leads al WhatsApp del equipo.`;
 
     /* ═════ State ═════ */
     let cfg = JSON.parse(localStorage.getItem('genesis-bot-cfg') || '{}');
@@ -434,7 +435,7 @@ OBJETIVO: Resolver dudas, generar interés y derivar leads calificados al WhatsA
     function greet() {
       chat.innerHTML = '';
       messages = [];
-      addMsg('bot', '¡Hola! Soy el asistente de Génesis Development Service 👋\n\n¿En qué puedo ayudarte? Puedo contarte sobre nuestros servicios, proyectos o coordinar una reunión.');
+      addMsg('bot', '¡Hola! Soy el asistente de Génesis. ¿En qué te ayudo?');
     }
 
     $('btn-clear').onclick = () => { if (cfg.key) greet(); else { chat.innerHTML = ''; messages = []; } };
@@ -458,8 +459,8 @@ OBJETIVO: Resolver dudas, generar interés y derivar leads calificados al WhatsA
               { role: 'system', content: SYSTEM_PROMPT },
               ...messages
             ],
-            temperature: 0.7,
-            max_tokens: 500
+            temperature: 0.5,
+            max_tokens: 120
           })
         });
 
