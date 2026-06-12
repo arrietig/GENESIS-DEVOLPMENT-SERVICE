@@ -141,10 +141,13 @@ window.addEventListener('DOMContentLoaded', () => {
   let isOpen  = false;
   let isBusy  = false;
 
+  const waFloat = document.querySelector('.wa-float');
+
   function openPanel() {
     root.classList.add('open');
     root.querySelector('.gx-chat-panel').setAttribute('aria-hidden', 'false');
     isOpen = true;
+    if (waFloat) waFloat.style.display = 'none';
     if (history.length === 0) greet();
     setTimeout(() => input.focus(), 250);
   }
@@ -152,6 +155,7 @@ window.addEventListener('DOMContentLoaded', () => {
     root.classList.remove('open');
     root.querySelector('.gx-chat-panel').setAttribute('aria-hidden', 'true');
     isOpen = false;
+    if (waFloat) waFloat.style.display = '';
   }
   toggle.addEventListener('click', () => isOpen ? closePanel() : openPanel());
   closeBtn.addEventListener('click', closePanel);
