@@ -177,7 +177,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function greet() {
-    addMsg('bot', '¡Hola! Soy el asistente de Génesis. ¿En qué te ayudo?');
+    addMsg('bot', '¡Hola! Soy Génesis. ¿En qué te ayudo?');
   }
 
   async function ask(text) {
