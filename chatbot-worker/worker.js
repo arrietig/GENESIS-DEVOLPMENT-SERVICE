@@ -49,9 +49,13 @@ OBJETIVO: Resolver dudas en pocas palabras y derivar leads al WhatsApp del equip
 
 export default {
   async fetch(request, env) {
-    const allowedOrigin = env.ALLOWED_ORIGIN || 'https://genesis.com.py';
+    const allowedOrigins = [
+      'https://genesis.com.py',
+      'https://www.genesis.com.py',
+      ...(env.ALLOWED_ORIGIN ? [env.ALLOWED_ORIGIN] : [])
+    ];
     const origin = request.headers.get('Origin') || '';
-    const corsOrigin = origin.endsWith('genesis.com.py') ? origin : allowedOrigin;
+    const corsOrigin = allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
 
     const corsHeaders = {
       'Access-Control-Allow-Origin': corsOrigin,
