@@ -989,6 +989,7 @@ footer {
   animation: floatPop 0.5s 1.5s ease both;
 }
 .gx-chat-toggle:hover { transform: scale(1.08); }
+.gx-chat-toggle svg { pointer-events: none; }
 .gx-chat-ring {
   position: absolute; inset: -6px;
   border-radius: 50%;
@@ -1035,6 +1036,10 @@ footer {
   background: radial-gradient(circle at 30% 30%, #00D4FF, #003040);
   box-shadow: 0 0 14px rgba(0,212,255,0.4);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #04060f;
 }
 .gx-chat-title { display: flex; flex-direction: column; line-height: 1.2; }
 .gx-chat-title strong { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; letter-spacing: 0.04em; }

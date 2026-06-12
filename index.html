@@ -31,7 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&family=Noto+Serif:wght@300;400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=2" />
+  <link rel="stylesheet" href="css/styles.css?v=3" />
   <!-- Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
@@ -501,10 +501,15 @@
   <div id="gx-chat" data-endpoint="https://genesis-chat.smrcartes.workers.dev">
     <button id="gx-chat-toggle" class="gx-chat-toggle" aria-label="Abrir chat">
       <span class="gx-chat-ring"></span>
-      <svg class="gx-chat-icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <svg class="gx-chat-icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+        <line x1="12" y1="2" x2="12" y2="5"/>
+        <circle cx="12" cy="2" r="1" fill="currentColor"/>
+        <rect x="4" y="6" width="16" height="14" rx="3"/>
+        <circle cx="9" cy="13" r="1.4" fill="currentColor" stroke="none"/>
+        <circle cx="15" cy="13" r="1.4" fill="currentColor" stroke="none"/>
+        <path d="M9 17 h6"/>
       </svg>
-      <svg class="gx-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+      <svg class="gx-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
     </button>
@@ -512,10 +517,19 @@
     <div id="gx-chat-panel" class="gx-chat-panel" aria-hidden="true">
       <header class="gx-chat-header">
         <div class="gx-chat-brand">
-          <span class="gx-chat-mark"></span>
+          <span class="gx-chat-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+              <line x1="12" y1="2" x2="12" y2="5"/>
+              <circle cx="12" cy="2" r="1" fill="currentColor"/>
+              <rect x="4" y="6" width="16" height="14" rx="3"/>
+              <circle cx="9" cy="13" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="13" r="1.4" fill="currentColor" stroke="none"/>
+              <path d="M9 17 h6"/>
+            </svg>
+          </span>
           <div class="gx-chat-title">
-            <strong>Génesis</strong>
-            <small><span class="gx-chat-dot"></span> En línea</small>
+            <strong>Asistente Génesis</strong>
+            <small><span class="gx-chat-dot"></span> Asistente IA · En línea</small>
           </div>
         </div>
         <button class="gx-chat-close" id="gx-chat-close" aria-label="Cerrar">
